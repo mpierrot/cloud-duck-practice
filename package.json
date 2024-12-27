@@ -61,7 +61,7 @@
     "jsii-pacmak": "^1.106.0",
     "jsii-rosetta": "~5.6.0",
     "projen": "^0.91.2",
-    "react": "^19.0.0",
+    "react": "^18.0.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^3.4.17",
     "ts-jest": "^29.2.5",
