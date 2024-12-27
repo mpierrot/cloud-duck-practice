@@ -42,9 +42,21 @@ export class CloudDuck extends Construct {
       logoutUrls: [Lazy.string({ produce: () => `https://${distributionDomainName}` })],
     });
 
+    // 新しい logBucket を作成（必要に応じて設定を調整）
+    const logBucket = new s3.Bucket(this, "LogBucket", {
+      removalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+    });
+
+    // 既存の props?.targetBuckets がある場合はマージして渡す例
+    const mergedBuckets = props?.targetBuckets 
+    ? [...props.targetBuckets, logBucket] 
+    : [logBucket];
+
     const api = new Api(this, "Api", {
       userPool: cognito.userPool,
-      targetBuckets: props?.targetBuckets,
+      // 新規作成した logBucket も解析対象に含める
+      targetBuckets: mergedBuckets,
       memory: props?.memory,
     });
 
@@ -52,6 +64,7 @@ export class CloudDuck extends Construct {
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
+
     const distribution = new cloudfront.Distribution(this, "CloudFront", {
       defaultRootObject: "index.html",
       defaultBehavior: {
