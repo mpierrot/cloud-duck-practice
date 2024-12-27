@@ -75,6 +75,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
+    "cloud-duck": "^0.0.10",
     "deploy-time-build": "^0.3.23"
   },
   "pnpm": {},
