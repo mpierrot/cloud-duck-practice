@@ -75,6 +75,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
+    "aws-cdk": "^2.173.4",
     "cloud-duck": "^0.0.10",
     "deploy-time-build": "^0.3.23"
   },
